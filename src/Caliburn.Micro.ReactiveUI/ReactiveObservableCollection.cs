@@ -7,9 +7,22 @@ using System.Threading.Tasks;
 
 namespace Caliburn.Micro.ReactiveUI
 {
+    using System.Reactive.Concurrency;
+
     public class ReactiveObservableCollection<T> : ReactiveList<T>, IObservableCollection<T>
     {
+        public ReactiveObservableCollection( IEnumerable<T> initialContents )
+            : base( initialContents )
+        {}
+
+        public ReactiveObservableCollection( IEnumerable<T> initialContents = null, double resetChangeThreshold = 0.3, IScheduler scheduler = null )
+            : base( initialContents, resetChangeThreshold, scheduler )
+        {}
+
         public bool IsNotifying { get; set; }
+
+        public ReactiveObservableCollection()
+        {}
 
         /// <summary>
         /// Notifies subscribers of the property change.
